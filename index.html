@@ -248,14 +248,18 @@ button:hover { background: #333; }
 .tool-page :is(button,select,summary) { min-height:36px; }
 .tool-page h1 { font-family:var(--tool-serif); font-size:32px; line-height:1.2; font-weight:500; letter-spacing:normal; }
 .tool-page :is(h2,h3) { font-family:var(--tool-serif); }
-.tool-page :is(a,button,input,select,textarea,summary,[tabindex]):focus-visible { outline:2px solid currentColor!important; outline-offset:3px; }
-.tool-page .tool-methodology { max-width:72ch; margin:24px auto; padding:16px; border-top:1px solid #bbb; font:17px/1.55 var(--tool-serif); }
-.tool-methodology summary { cursor:pointer; font-weight:600; }
-.tool-methodology h3 { margin:18px 0 6px; font-size:22px; }
-.tool-methodology p { margin:8px 0; }
+.tool-page :is(a,button,input,select,textarea,summary,[tabindex]):focus-visible { outline:2px solid #222!important; outline-offset:3px; box-shadow:0 0 0 3px #fff!important; }
+.tool-page .tool-methodology { box-sizing:border-box; grid-column:1 / -1; width:100%; max-width:none; margin:24px 0 0; padding:16px 0; border:0; border-top:1px solid #bbb; border-radius:0; background:transparent; color:#222; font:18px/1.55 var(--tool-serif); text-align:left; }
+.tool-page .tool-methodology > summary { cursor:pointer; font:400 21px/1.4 var(--tool-serif)!important; letter-spacing:normal; text-transform:none; }
+.tool-page .tool-methodology h3 { margin:20px 0 6px; font:400 20px/1.4 var(--tool-serif); letter-spacing:normal; text-transform:none; }
+.tool-page .tool-methodology :is(p,li) { max-width:none; font:inherit; }
+.tool-page .tool-methodology p { margin:8px 0; }
+.tool-page .tool-methodology a { color:inherit; text-decoration:underline; text-underline-offset:3px; }
+.tool-page .tool-methodology .equation { overflow-x:auto; padding:10px 0; font-size:17px; }
+.tool-page .tool-methodology table { width:100%; border-collapse:collapse; font:inherit; }
+.tool-page .tool-methodology :is(th,td) { padding:8px; border-bottom:1px solid #ddd; text-align:left; font-weight:400; vertical-align:top; }
 @media(max-width:600px) { .tool-page :is(button,select,summary) { min-height:44px; } }
 @media(prefers-reduced-motion:reduce) { .tool-page *, .tool-page *::before, .tool-page *::after { scroll-behavior:auto!important; transition:none!important; } }
-
 /* Tool-specific styles */
 .tool-page .subtitle{font:18px/1.5 var(--tool-serif)}.tool-page .canvas-wrap{min-width:0}.tool-page canvas{width:100%;height:auto}.tool-page .check-row{justify-content:flex-start;gap:8px}</style>
 </head>
@@ -341,8 +345,8 @@ button:hover { background: #333; }
       </div>
     </aside>
   </div>
-</div>
 <details class="tool-methodology"><summary>Model and methodology</summary><h3>Model</h3><p>Seeded synthetic groups have adjustable means, spread, noise and a common within-group slope. Ordinary least-squares lines are fitted within groups, to the pooled sample and to the group means.</p><h3>Assumptions and limitations</h3><p>Pooled and within-group associations answer different questions. A reversal alone does not identify the causal effect or determine which variables should be adjusted for. The indicator here specifically detects a positive average within-group slope with a negative pooled slope; other reversals can be explored in the plot.</p><h3>References</h3><p>E. H. Simpson (1951), <a href="https://doi.org/10.1111/j.2517-6161.1951.tb00088.x">The Interpretation of Interaction in Contingency Tables</a>. This is a continuous regression illustration of the aggregation effect. <a href="https://github.com/DavidFreeborn/simpsons-paradox-visualiser">Implementation</a>.</p></details>
+</div>
 <script>
 const canvas=document.getElementById('plot'),ctx=canvas.getContext('2d'),palette=['#2563eb','#16a34a','#9333ea','#f97316','#0891b2'];let seed=14;const $=id=>document.getElementById(id);const els={within:$('within'),xGap:$('xGap'),yDrop:$('yDrop'),xSpread:$('xSpread'),noise:$('noise'),groups:$('groups'),people:$('people'),showGroupLines:$('showGroupLines'),showMeans:$('showMeans'),resample:$('resample'),withinVal:$('withinVal'),xGapVal:$('xGapVal'),yDropVal:$('yDropVal'),xSpreadVal:$('xSpreadVal'),noiseVal:$('noiseVal'),withinStat:$('withinStat'),pooledStat:$('pooledStat'),meansStat:$('meansStat'),paradoxStat:$('paradoxStat')};
 function mulberry32(a){return function(){let t=a+=0x6D2B79F5;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}}
